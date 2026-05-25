@@ -1,5 +1,5 @@
 import { kv } from "../../lib/server/kv.js";
-import { isFrozenEarlySwaparcer } from "../../lib/server/earlySwaparcerFrozen.js";
+import { isFrozenEarlyQuader } from "../../lib/server/earlyQuadrantFrozen.js";
 
 function sanitizeBadges(raw) {
   if (!raw) return {};
@@ -43,10 +43,10 @@ export default async function handler(req, res) {
             const badges = sanitizeBadges(profile.badges);
             const addrCandidate = String(profile.walletAddress || walletAddress || "").toLowerCase();
             const inFrozenSnapshot = addrCandidate
-              ? await isFrozenEarlySwaparcer(addrCandidate)
+              ? await isFrozenEarlyQuader(addrCandidate)
               : false;
-            if (inFrozenSnapshot) badges.earlySwaparcer = true;
-            else delete badges.earlySwaparcer;
+            if (inFrozenSnapshot) badges.earlyQuadrant = true;
+            else delete badges.earlyQuadrant;
             profile.badges = badges;
 
             // Persist cleanup so stale true flags are removed permanently.
@@ -79,10 +79,10 @@ export default async function handler(req, res) {
         const legacyBadges = sanitizeBadges(legacyProfile.badges);
         const legacyAddr = String(legacyProfile.walletAddress || walletAddress || "").toLowerCase();
         const inFrozenSnapshot = legacyAddr
-          ? await isFrozenEarlySwaparcer(legacyAddr)
+          ? await isFrozenEarlyQuader(legacyAddr)
           : false;
-        if (inFrozenSnapshot) legacyBadges.earlySwaparcer = true;
-        else delete legacyBadges.earlySwaparcer;
+        if (inFrozenSnapshot) legacyBadges.earlyQuadrant = true;
+        else delete legacyBadges.earlyQuadrant;
         const normalizedLegacyProfile = {
           ...legacyProfile,
           badges: legacyBadges,

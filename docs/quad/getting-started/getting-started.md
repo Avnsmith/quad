@@ -1,6 +1,6 @@
 # Getting started
 
-This page gets you from zero to your first successful action on SwapArc. For a fast product overview, read [How SwapArc works](../introduction/how-swaparc-works.md).
+This page gets you from zero to your first successful action on SwapArc. For a fast product overview, read [How SwapArc works](../introduction/how-quad-works.md).
 
 ## 1. What SwapArc is
 
@@ -26,12 +26,12 @@ Before you begin, confirm this checklist:
   - Standard browser wallet / WalletConnect-compatible path, or **Connect via Gmail / Email** (Circle).
   - Wallet setup details: [Connect a wallet](connect-a-wallet.md).
 - **Test tokens (optional)**
-  - Needed for swap and pools (for example USDC / EURC / SWPRC on testnet).
+  - Needed for swap and pools (for example USDC / EURC / QDRC on testnet).
   - Source them from faucet or another testnet holder.
 
 For normal usage, you do not need to run your own node. If you host your own instance, read [Prerequisites & environment](prerequisites-and-environment.md).
 
-![SwapArc connected on Arc testnet with Get Faucet and Swap panel visible](/docs-images/getting-started-swaparc.png)
+![SwapArc connected on Arc testnet with Get Faucet and Swap panel visible](/docs-images/getting-started-quad.png)
 
 ## 3. Step-by-step first use
 

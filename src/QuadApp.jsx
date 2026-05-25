@@ -2,10 +2,10 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import { Point, utils as secpUtils } from "@noble/secp256k1";
-import logo from "./assets/swaparc-logo.png";
+import logo from "./assets/quad-logo.svg";
 import usdcLogo from "./assets/usdc.jpg";
 import eurcLogo from "./assets/eurc.jpg";
-import swprcLogo from "./assets/swprc.jpg";
+import qdrcLogo from "./assets/qdrc.jpg";
 import "./App.css";
 import { getPrices } from "./priceFetcher";
 import { CircleSigner } from "./utils/CircleSigner";
@@ -72,12 +72,12 @@ const PRIVACY_POOL_ADDRESS_USDC =
   "";
 const PRIVACY_POOL_ADDRESS_EURC =
   import.meta.env.VITE_PRIVACY_POOL_ADDRESS_EURC || "";
-const PRIVACY_POOL_ADDRESS_SWPRC =
-  import.meta.env.VITE_PRIVACY_POOL_ADDRESS_SWPRC || "";
+const PRIVACY_POOL_ADDRESS_QDRC =
+  import.meta.env.VITE_PRIVACY_POOL_ADDRESS_QDRC || "";
 const PRIVACY_POOL_ADDRESS_BY_SYMBOL = {
   USDC: PRIVACY_POOL_ADDRESS_USDC,
   EURC: PRIVACY_POOL_ADDRESS_EURC,
-  SWPRC: PRIVACY_POOL_ADDRESS_SWPRC,
+  QDRC: PRIVACY_POOL_ADDRESS_QDRC,
 };
 function privacyPoolAddressForSymbol(symbol) {
   const key = String(symbol || "").trim().toUpperCase();
@@ -116,7 +116,7 @@ const PAYROLL_MANUAL_PAY_RECURRING_MSG =
 const TOKEN_INDICES = {
   USDC: 0,
   EURC: 1,
-  SWPRC: 2,
+  QDRC: 2,
 };
 
 const POOLS = [
@@ -128,16 +128,16 @@ const POOLS = [
     lpToken: "0x454f21b7738A446f79ea4ff00e71b9e8E9E6FEE9",
   },
   {
-    id: "usdc-swprc",
-    name: "USDC / SWPRC",
-    tokens: ["USDC", "SWPRC"],
+    id: "usdc-qdrc",
+    name: "USDC / QDRC",
+    tokens: ["USDC", "QDRC"],
     poolAddress: "0x613bc8A188a571e7Ffe3F884FabAB0F43ABB8282",
     lpToken: "0x2E2C7B48B2422223aD9628DA159f304192c24d3B",
   },
   {
-    id: "eurc-swprc",
-    name: "EURC / SWPRC",
-    tokens: ["EURC", "SWPRC"],
+    id: "eurc-qdrc",
+    name: "EURC / QDRC",
+    tokens: ["EURC", "QDRC"],
     poolAddress: "0x9463DE67E73B42B2cE5e45cab7e32184B9c24939",
     lpToken: "0xb81816d4fBB3D33b56c3efc04675d1cDed0f68b1",
   },
@@ -226,7 +226,7 @@ function privacyPoolDepositErrorMessage(err) {
 const TOKEN_LOGOS = {
   USDC: usdcLogo,
   EURC: eurcLogo,
-  SWPRC: swprcLogo,
+  QDRC: qdrcLogo,
 };
 
 const INITIAL_TOKENS = [
@@ -241,8 +241,8 @@ const INITIAL_TOKENS = [
     address: "0x89B50855Aa3bE2F677cD6303Cec089B5F319D72a",
   },
   {
-    symbol: "SWPRC",
-    name: "SwapARC Token",
+    symbol: "QDRC",
+    name: "Quad Token",
     address: "0xBE7477BF91526FC9988C8f33e91B6db687119D45",
   },
 ];
@@ -815,7 +815,7 @@ function formatPriceMock(sym) {
     {
       USDC: 1,
       EURC: 1.063,
-      SWPRC: 0.71,
+      QDRC: 0.71,
       USDG: 1,
       ARCX: 0.42,
       wETH: 3475.12,
@@ -907,7 +907,7 @@ function TokenSelect({ tokens, value, onChange }) {
   );
 }
 
-export default function SwaparcApp() {
+export default function QuadApp() {
   const navigate = useNavigate();
   const isMountedRef = useRef(false);
   useEffect(() => {
@@ -961,12 +961,12 @@ export default function SwaparcApp() {
   const [liqInputs, setLiqInputs] = useState({
     USDC: "",
     EURC: "",
-    SWPRC: "",
+    QDRC: "",
   });
   const [myDeposits, setMyDeposits] = useState({
     USDC: 0,
     EURC: 0,
-    SWPRC: 0,
+    QDRC: 0,
   });
 
   const [liqLoading, setLiqLoading] = useState(false);
@@ -1052,7 +1052,7 @@ export default function SwaparcApp() {
     recurringPayments: false,
     payrollAutomation: false,
     advancedPrivacy: false,
-    isEarlySwaparcer: false,
+    isEarlyQuadrant: false,
     subscriptionActive: false,
     expiresAt: null,
   });
@@ -1156,7 +1156,7 @@ export default function SwaparcApp() {
   const [poolsView, setPoolsView] = useState("positions");
   const [swapHistory, setSwapHistory] = useState(() => {
     try {
-      const saved = localStorage.getItem("swaparc_history");
+      const saved = localStorage.getItem("quad_history");
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -1174,7 +1174,7 @@ export default function SwaparcApp() {
   const [slippageTolerance, setSlippageTolerance] = useState(1); // percent, default 1%
   const [expectedOutputNum, setExpectedOutputNum] = useState(null); // raw number for calculations
   const [expectedOutputRaw, setExpectedOutputRaw] = useState(null); // bigint wei for min_dy
-  const [swapPoolTokenBalances, setSwapPoolTokenBalances] = useState({}); // { USDC, EURC, SWPRC } for swap pool
+  const [swapPoolTokenBalances, setSwapPoolTokenBalances] = useState({}); // { USDC, EURC, QDRC } for swap pool
   const [highImpactConfirmed, setHighImpactConfirmed] = useState(false);
   const [showSlippagePanel, setShowSlippagePanel] = useState(false);
 
@@ -1188,7 +1188,7 @@ export default function SwaparcApp() {
   const [landingApiStats, setLandingApiStats] = useState(() => {
     if (typeof window === "undefined") return null;
     try {
-      const raw = window.localStorage.getItem("swaparc_landing_api_stats");
+      const raw = window.localStorage.getItem("quad_landing_api_stats");
       if (!raw) return null;
       const parsed = JSON.parse(raw);
       if (!parsed || typeof parsed !== "object") return null;
@@ -1216,13 +1216,13 @@ export default function SwaparcApp() {
   const [userEmail, setUserEmail] = useState(null);
   const resourceLinks = [
     { label: "Docs", to: "/docs", internal: true },
-    { label: "X", href: "https://x.com/swaparc_app", external: true },
-    { label: "GitHub", href: "https://github.com/Somtiee/swaparc", external: true },
+    { label: "X", href: "https://x.com/quad_app", external: true },
+    { label: "GitHub", href: "https://github.com/Somtiee/quad", external: true },
     { label: "Discord", href: "#", comingSoon: true },
   ];
   const footerLinks = [
-    { label: "GitHub", href: "https://github.com/Somtiee/swaparc", external: true },
-    { label: "X", href: "https://x.com/swaparc_app", external: true },
+    { label: "GitHub", href: "https://github.com/Somtiee/quad", external: true },
+    { label: "X", href: "https://x.com/quad_app", external: true },
     { label: "Discord", href: "#", comingSoon: true },
   ];
   const showToastMessage = (message, durationMs = 2400) => {
@@ -2402,7 +2402,7 @@ export default function SwaparcApp() {
 
   function privateReceiveEnableLinkForAddress(address) {
     const normalized = normalizeAddress(address);
-    if (typeof window === "undefined") return `swaparc://enable-private-receive?address=${normalized}`;
+    if (typeof window === "undefined") return `quad://enable-private-receive?address=${normalized}`;
     const url = new URL(window.location.origin);
     url.searchParams.set("enablePrivateReceive", "1");
     url.searchParams.set("address", normalized);
@@ -3233,19 +3233,19 @@ export default function SwaparcApp() {
 
     let total = 0;
     // Wallet Balances
-    ["USDC", "EURC", "SWPRC"].forEach((sym) => {
+    ["USDC", "EURC", "QDRC"].forEach((sym) => {
       const bal = Number(balances[sym] || 0);
       const price = Number(tokenPrices[sym] || 0);
       total += bal * price;
     });
 
     // LP Positions Value (added to portfolio?)
-    // User requirement: "Total Portfolio Value = USDC_value + EURC_value + SWPRC_value"
+    // User requirement: "Total Portfolio Value = USDC_value + EURC_value + QDRC_value"
     // But usually portfolio includes LP. The prompt separates them.
     // "Total Portfolio Value = ..." strictly lists the 3 tokens.
     // However, previous code added LP value. I will follow the strict formula first,
     // but usually users want to see total net worth.
-    // Wait, the prompt says "Total Portfolio Value = USDC_value + EURC_value + SWPRC_value".
+    // Wait, the prompt says "Total Portfolio Value = USDC_value + EURC_value + QDRC_value".
     // It does NOT explicitly say "+ LP Value".
     // BUT, the previous implementation did.
     // I will include LP value if it was there, or check context.
@@ -3311,10 +3311,10 @@ export default function SwaparcApp() {
   // Badge Logic (Memoized)
   // STRICT LOCK: frontend must never recompute badge eligibility from
   // swap/volume/LP thresholds. Snapshot-backed server access state
-  // (privpayAccess.isEarlySwaparcer) is the single source of truth.
+  // (privpayAccess.isEarlyQuadrant) is the single source of truth.
   const badgeState = useMemo(() => {
-    return { earlySwaparcer: !!privpayAccess?.isEarlySwaparcer };
-  }, [privpayAccess?.isEarlySwaparcer]);
+    return { earlyQuadrant: !!privpayAccess?.isEarlyQuadrant };
+  }, [privpayAccess?.isEarlyQuadrant]);
 
   useEffect(() => {
     // Prevent race condition: Only calculate totals AFTER both balances AND prices are available.
@@ -3331,7 +3331,7 @@ export default function SwaparcApp() {
         recurringPayments: false,
         payrollAutomation: false,
         advancedPrivacy: false,
-        isEarlySwaparcer: false,
+        isEarlyQuadrant: false,
         subscriptionActive: false,
         expiresAt: null,
       });
@@ -3371,7 +3371,7 @@ export default function SwaparcApp() {
     setLandingApiStats(nextStats);
     if (typeof window !== "undefined") {
       try {
-        window.localStorage.setItem("swaparc_landing_api_stats", JSON.stringify(nextStats));
+        window.localStorage.setItem("quad_landing_api_stats", JSON.stringify(nextStats));
       } catch {
         // ignore localStorage errors
       }
@@ -3589,7 +3589,7 @@ export default function SwaparcApp() {
       }
 
       try {
-        const key = `swaparc_lp_cache_${String(walletAddr).toLowerCase()}`;
+        const key = `quad_lp_cache_${String(walletAddr).toLowerCase()}`;
         const cachedRaw = window.localStorage.getItem(key);
         if (cachedRaw) {
           const cached = JSON.parse(cachedRaw);
@@ -3729,7 +3729,7 @@ export default function SwaparcApp() {
     const walletAddr = getActiveWalletAddress();
     if (!walletAddr || typeof window === "undefined") return;
     try {
-      const key = `swaparc_lp_cache_${String(walletAddr).toLowerCase()}`;
+      const key = `quad_lp_cache_${String(walletAddr).toLowerCase()}`;
       window.localStorage.setItem(
         key,
         JSON.stringify({
@@ -4936,7 +4936,7 @@ export default function SwaparcApp() {
           // 3. Fetch swap pool balances (Consolidated to one call)
           try {
             const rawBalances = await pool.getBalances();
-            const symbols = ["USDC", "EURC", "SWPRC"];
+            const symbols = ["USDC", "EURC", "QDRC"];
             const nextBalances = {};
             for (let idx = 0; idx < symbols.length && idx < rawBalances.length; idx++) {
               const sym = symbols[idx];
@@ -5004,7 +5004,7 @@ export default function SwaparcApp() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("swaparc_history", JSON.stringify(swapHistory));
+      localStorage.setItem("quad_history", JSON.stringify(swapHistory));
     } catch (e) {
       console.warn("Failed to persist history", e);
     }
@@ -10375,7 +10375,7 @@ export default function SwaparcApp() {
           ...prev,
           USDC: prev.USDC + Number(liqInputs.USDC || 0),
           EURC: prev.EURC + Number(liqInputs.EURC || 0),
-          SWPRC: prev.SWPRC + Number(liqInputs.SWPRC || 0),
+          QDRC: prev.QDRC + Number(liqInputs.QDRC || 0),
         }));
       } else {
         // --- Injected Wallet Path ---
@@ -10446,7 +10446,7 @@ export default function SwaparcApp() {
         ...prev,
         USDC: prev.USDC + Number(liqInputs.USDC || 0),
         EURC: prev.EURC + Number(liqInputs.EURC || 0),
-        SWPRC: prev.SWPRC + Number(liqInputs.SWPRC || 0),
+        QDRC: prev.QDRC + Number(liqInputs.QDRC || 0),
       }));
 
       // Only set success if not already set by Circle
@@ -10460,7 +10460,7 @@ export default function SwaparcApp() {
       
       setPoolsView("positions");
       setShowAddLiquidity(false);
-      setLiqInputs({ USDC: "", EURC: "", SWPRC: "" });
+      setLiqInputs({ USDC: "", EURC: "", QDRC: "" });
     } catch (err) {
       console.error("[App] Add liquidity failed:", err);
       alert("Add liquidity failed: " + (err.message || err));
@@ -10472,7 +10472,7 @@ export default function SwaparcApp() {
   function closeAddLiquidity() {
     setShowAddLiquidity(false);
     setActivePreset(null);
-    setLiqInputs({ USDC: "", EURC: "", SWPRC: "" });
+    setLiqInputs({ USDC: "", EURC: "", QDRC: "" });
   }
 
   async function handleRemoveLiquidity() {
@@ -10693,9 +10693,9 @@ export default function SwaparcApp() {
               setActiveTab("landing");
             }}
           >
-            <img src={logo} alt="SwapARC" className="logoImg big" />
+            <img src={logo} alt="Quad" className="logoImg big" />
             <div>
-              <div className="title">SWAPARC</div>
+              <div className="title">QUAD</div>
               <div className="subtitle">Stablecoin FX, Treasury & Private Payments</div>
             </div>
           </div>
@@ -11373,13 +11373,13 @@ export default function SwaparcApp() {
                   </section>
 
                   <section className="landingWhySection landingReveal">
-                    <span className="landingWhyPill">Why Swaparc</span>
+                    <span className="landingWhyPill">Why Quad</span>
                     <h3>
                       The unified production platform for stablecoin FX, treasury, and private
                       payments on ARC.
                     </h3>
                     <p>
-                      Swaparc is designed for operators who move real value: fast settlement,
+                      Quad is designed for operators who move real value: fast settlement,
                       capital efficiency, and confidentiality-ready payment workflows in one
                       production interface.
                     </p>
@@ -11787,17 +11787,17 @@ export default function SwaparcApp() {
                                   gap: 12,
                                 }}
                               >
-                                {/* Early Swaparcer Badge - snapshot-only.
+                                {/* Early Quadrant Badge - snapshot-only.
                                     Non-holders see the same tile but greyed out. */}
                                 {(() => {
-                                  const unlocked = badgeState.earlySwaparcer;
+                                  const unlocked = badgeState.earlyQuadrant;
                                   return (
                                     <div
                                       className="badgeTile"
                                       title={
                                         unlocked
-                                          ? "Early Swaparcer - lifetime status"
-                                          : "Early Swaparcer Badge program is closed."
+                                          ? "Early Quadrant - lifetime status"
+                                          : "Early Quadrant Badge program is closed."
                                       }
                                       style={{
                                         width: 140,
@@ -11823,8 +11823,8 @@ export default function SwaparcApp() {
                                       }}
                                     >
                                       <img
-                                        src="/badges/early-swaparcer.png"
-                                        alt="Early Swaparcer"
+                                        src="/badges/early-quader.png"
+                                        alt="Early Quadrant"
                                         style={{
                                           width: "100%",
                                           height: 112,
@@ -11840,7 +11840,7 @@ export default function SwaparcApp() {
                                           textTransform: "uppercase",
                                         }}
                                       >
-                                        Early Swaparcer
+                                        Early Quadrant
                                       </div>
                                     </div>
                                   );
@@ -11909,7 +11909,7 @@ export default function SwaparcApp() {
                                 overflow: "hidden",
                               }}
                             >
-                              {["USDC", "EURC", "SWPRC"].map((sym) => {
+                              {["USDC", "EURC", "QDRC"].map((sym) => {
                                 const bal = Number(balances[sym] || 0);
                                 const val = bal * Number(tokenPrices[sym] || 0);
                                 return (
@@ -12821,7 +12821,7 @@ export default function SwaparcApp() {
                                 setBillForm((p) => ({ ...p, token: e.target.value }))
                               }
                             >
-                              {["USDC", "EURC", "SWPRC"].map((sym) => (
+                              {["USDC", "EURC", "QDRC"].map((sym) => (
                                 <option key={sym} value={sym}>
                                   {sym}
                                 </option>
@@ -13570,7 +13570,7 @@ export default function SwaparcApp() {
                                 setCompanyForm((p) => ({ ...p, token: e.target.value }))
                               }
                             >
-                              {["USDC", "EURC", "SWPRC"].map((sym) => (
+                              {["USDC", "EURC", "QDRC"].map((sym) => (
                                 <option key={sym} value={sym}>
                                   {sym}
                                 </option>
@@ -14559,7 +14559,7 @@ export default function SwaparcApp() {
         <footer className="siteFooter" role="contentinfo">
           <div className="siteFooterInner">
             <div className="siteFooterBrand">
-              <strong>Swaparc</strong>
+              <strong>Quad</strong>
               <span>Stablecoin FX, liquidity, and private payments on ARC.</span>
             </div>
             <div className="siteFooterLinks">
@@ -14960,7 +14960,7 @@ export default function SwaparcApp() {
             <h3 style={{ marginBottom: 24, fontSize: 22, fontWeight: 600 }}>Deposit Liquidity</h3>
 
             <div style={{ marginBottom: 24 }}>
-              {(activePreset?.tokens || ["USDC", "EURC", "SWPRC"]).map((sym) => (
+              {(activePreset?.tokens || ["USDC", "EURC", "QDRC"]).map((sym) => (
                 <div key={sym} className="card" style={{ marginBottom: 12, padding: "16px 20px", background: "rgba(0,0,0,0.2)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

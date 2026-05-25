@@ -17,9 +17,9 @@ if (!hasRedis && !hasUpstash) {
 
 const kv = createClient();
 
-const FROZEN_KV_KEY = "badges:earlySwaparcer:frozen";
+const FROZEN_KV_KEY = "badges:earlyQuadrant:frozen";
 const FROZEN_FILE_URL = new URL(
-  "../data/badges/earlySwaparcer.frozen.json",
+  "../data/badges/earlyQuadrant.frozen.json",
   import.meta.url
 );
 const FROZEN_DIR_URL = new URL("../data/badges/", import.meta.url);
@@ -49,14 +49,14 @@ function qualifies(profile) {
   if (swapVolume >= SWAP_VOLUME_THRESHOLD) return true;
   if (lpProvided >= LP_PROVIDED_THRESHOLD) return true;
   const badges = parseBadges(profile?.badges);
-  if (badges?.earlySwaparcer === true || badges?.earlySwaparcer === "true") return true;
+  if (badges?.earlyQuadrant === true || badges?.earlyQuadrant === "true") return true;
   return false;
 }
 
 async function persistBadgeOnProfile(profileKey, existingProfile) {
   const badges = parseBadges(existingProfile?.badges);
-  if (badges.earlySwaparcer === true) return false;
-  const updated = { ...badges, earlySwaparcer: true };
+  if (badges.earlyQuadrant === true) return false;
+  const updated = { ...badges, earlyQuadrant: true };
   try {
     await kv.hset(profileKey, { badges: JSON.stringify(updated) });
     return true;
@@ -67,7 +67,7 @@ async function persistBadgeOnProfile(profileKey, existingProfile) {
 }
 
 async function main() {
-  console.log("Snapshotting Early Swaparcer holders...");
+  console.log("Snapshotting Early Quadrant holders...");
   console.log(
     `Criteria: ${SWAP_COUNT_THRESHOLD}+ swaps OR $${SWAP_VOLUME_THRESHOLD.toLocaleString()}+ volume OR $${LP_PROVIDED_THRESHOLD.toLocaleString()}+ LP, OR already has badge.`
   );
@@ -172,6 +172,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("snapshotEarlySwaparcers crashed:", err);
+  console.error("snapshotEarlyQuadrants crashed:", err);
   process.exit(1);
 });

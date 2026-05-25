@@ -10,7 +10,7 @@
 
 Use a **standard wallet** (browser extension or WalletConnect-compatible session) for direct signing or an optional **Circle email wallet** for email, OTP and managed signing when that fits your users.
 
-**New here?** Start with [How SwapArc works](how-swaparc-works.md)—a short product tour before you dive deeper.
+**New here?** Start with [How SwapArc works](how-quad-works.md)—a short product tour before you dive deeper.
 
 ## Core capabilities
 

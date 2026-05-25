@@ -16,11 +16,11 @@ if (!hasRedis && !hasUpstash) {
 const kv = createClient();
 
 async function main() {
-  console.log("Starting Early Swaparcer check...");
+  console.log("Starting Early Quadrant check...");
   console.log("Criteria: 100+ swaps OR $10k+ volume OR $1k+ LP provided");
 
   let cursor = 0;
-  const earlySwaparcers = [];
+  const earlyQuadrants = [];
   let totalProfilesScanned = 0;
 
   try {
@@ -50,13 +50,13 @@ async function main() {
           const lpProvided = Number(profile.lpProvided || 0);
 
           // Check criteria
-          const isEarlySwaparcer =
+          const isEarlyQuadrant =
             swapCount >= 100 ||
             swapVolume >= 10000 ||
             lpProvided >= 1000;
 
-          if (isEarlySwaparcer) {
-            earlySwaparcers.push({
+          if (isEarlyQuadrant) {
+            earlyQuadrants.push({
               userId,
               username: profile.username || "Unknown",
               swapCount,
@@ -74,12 +74,12 @@ async function main() {
     console.log("\n");
     console.log("========================================");
     console.log(`Total Profiles Scanned: ${totalProfilesScanned}`);
-    console.log(`Total EARLY SWAPARCERS Found: ${earlySwaparcers.length}`);
+    console.log(`Total EARLY QUADERS Found: ${earlyQuadrants.length}`);
     console.log("========================================");
 
-    if (earlySwaparcers.length > 0) {
+    if (earlyQuadrants.length > 0) {
       console.log("\nQualifying Users:");
-      earlySwaparcers.forEach((user, i) => {
+      earlyQuadrants.forEach((user, i) => {
         const triggers = [];
         if (user.swapCount >= 100) triggers.push(`Swaps: ${user.swapCount}`);
         if (user.swapVolume >= 10000) triggers.push(`Vol: $${user.swapVolume.toFixed(2)}`);
@@ -91,9 +91,9 @@ async function main() {
       });
       
       console.log("\n========================================");
-      console.log(`FINAL COUNT: ${earlySwaparcers.length} Early Swaparcers found.`);
+      console.log(`FINAL COUNT: ${earlyQuadrants.length} Early Quadrants found.`);
     } else {
-      console.log("No users meet the Early Swaparcer criteria yet.");
+      console.log("No users meet the Early Quadrant criteria yet.");
     }
     console.log("========================================");
 

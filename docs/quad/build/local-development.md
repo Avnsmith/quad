@@ -39,7 +39,7 @@ Those URLs must resolve to the **WASM** and **zkey** artifacts your deployment e
 
 The in-app documentation viewer renders Markdown with a simple parser: **pipe tables** appear as monospace blocks, not HTML tables. For layout-critical tables, prefer the repo markdown in an external renderer or duplicate key fields as lists.
 
-When you edit docs under `docs/swaparc/`, preview dense tables in GitHub, your editor or another full Markdown renderer, then keep in-app pages readable by repeating critical columns as prose or definition-style lists where needed.
+When you edit docs under `docs/quad/`, preview dense tables in GitHub, your editor or another full Markdown renderer, then keep in-app pages readable by repeating critical columns as prose or definition-style lists where needed.
 
 ## Local safety checklist
 

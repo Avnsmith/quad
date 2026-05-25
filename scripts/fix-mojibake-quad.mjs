@@ -1,13 +1,13 @@
 /**
- * Repair SwaparcApp.jsx when UTF-8 symbols were saved as Latin-1 mojibake.
+ * Repair QuadApp.jsx when UTF-8 symbols were saved as Latin-1 mojibake.
  * Restores proper Unicode (from pre-d4b7544 UI), NOT ASCII placeholders.
  *
- * Usage: node scripts/fix-mojibake-swaparc.mjs
+ * Usage: node scripts/fix-mojibake-quad.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
 
-const file = path.join(process.cwd(), "src", "SwaparcApp.jsx");
+const file = path.join(process.cwd(), "src", "QuadApp.jsx");
 let s = fs.readFileSync(file, "utf8");
 
 const replacements = [

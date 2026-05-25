@@ -1,5 +1,5 @@
 import { kv } from "../../lib/server/kv.js";
-import { isFrozenEarlySwaparcer } from "../../lib/server/earlySwaparcerFrozen.js";
+import { isFrozenEarlyQuader } from "../../lib/server/earlyQuadrantFrozen.js";
 
 function parseBadges(raw) {
   if (!raw) return {};
@@ -45,13 +45,13 @@ export default async function handler(req, res) {
     // Existing stored true flags are ignored if wallet is not frozen.
     const candidateAddress = String(profile.walletAddress || userId || "").toLowerCase();
     const inFrozenSnapshot = candidateAddress
-      ? await isFrozenEarlySwaparcer(candidateAddress)
+      ? await isFrozenEarlyQuader(candidateAddress)
       : false;
-    const earlySwaparcerFlag = inFrozenSnapshot;
+    const earlyQuadrantFlag = inFrozenSnapshot;
 
     const updatedBadges = { ...profile.badges };
-    if (earlySwaparcerFlag) updatedBadges.earlySwaparcer = true;
-    else delete updatedBadges.earlySwaparcer;
+    if (earlyQuadrantFlag) updatedBadges.earlyQuadrant = true;
+    else delete updatedBadges.earlyQuadrant;
 
     const updatedProfile = {
       ...profile,

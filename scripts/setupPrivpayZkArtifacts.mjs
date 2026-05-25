@@ -54,7 +54,7 @@ function downloadFile(url, dest) {
     const file = fs.createWriteStream(dest);
     const opts = {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; swaparc-setup/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; quad-setup/1.0)",
         Accept: "*/*",
       },
     };
@@ -151,7 +151,7 @@ function buildLocalFinalPtau(power) {
     "contribute",
     pot0,
     pot1,
-    "-n=swaparc-local",
+    "-n=quad-local",
     `-e=${e1}`,
     "-v",
   ]);
@@ -172,7 +172,7 @@ async function tryGrothSetupWithPtau(ptauPath) {
     "contribute",
     zkey0,
     zkey1,
-    "-n=swaparc-dev",
+    "-n=quad-dev",
     `-e=${entropy}`,
     "-v",
   ]);

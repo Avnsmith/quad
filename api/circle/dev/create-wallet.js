@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     }
 
     const client = getClient();
-    const name = `swaparc-${Buffer.from(String(email)).toString("hex").slice(0, 16)}`;
+    const name = `quad-${Buffer.from(String(email)).toString("hex").slice(0, 16)}`;
 
     const walletSetResp = await client.createWalletSet({ name });
     const walletSetId = walletSetResp?.data?.walletSet?.id || "";

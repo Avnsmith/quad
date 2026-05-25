@@ -17,7 +17,7 @@ Callers pass **`userId`** as a **required** query parameter: it may be a **logic
 **Behavior**
 
 - If **`userId` starts with `0x`**, the server uses **`profile:{lowercase}`** and may resolve **`wallet:{address}`** to a **legacy mapped profile key**, so the same human can appear under stable storage even when the client rotates casing or mixes “profile id” vs “wallet id” in the URL.
-- **Badges are sanitized**; **`earlySwaparcer`** is enforced against a **frozen snapshot (`earlySwaparcerFrozen`)**, not arbitrary client flags (clients cannot mint prestige badges by posting crafted hash fields).
+- **Badges are sanitized**; **`earlyQuadrant`** is enforced against a **frozen snapshot (`earlyQuadrantFrozen`)**, not arbitrary client flags (clients cannot mint prestige badges by posting crafted hash fields).
 
 **Responses**
 
@@ -118,7 +118,7 @@ Cached landing-page metrics for the marketing/home experience.
 **Sources (read-only, no `profile:*` SCAN on this route)**
 
 - Precomputed KV keys: **`stats:countUniqueSwappers:last`**, **`stats:totalSwapVolume:last`** (updated by hourly cron — see below)
-- Optional **Arclenz** `https://arclenz.xyz/api/ecosystem/swaparc`
+- Optional **Arclenz** `https://arclenz.xyz/api/ecosystem/quad`
 - **File fallbacks** under **`data/stats/*.latest.json`**
 - **High-water** key **`stats:landing:highwater:v1`** so displayed totals do not regress
 
@@ -157,7 +157,7 @@ Liveness probe only.
 ```json
 {
   "status": "ok",
-  "service": "swaparc-api"
+  "service": "quad-api"
 }
 ```
 

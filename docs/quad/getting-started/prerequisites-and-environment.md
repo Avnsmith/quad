@@ -17,8 +17,8 @@ For signing during development you will configure **one** of two paths, matching
 Clone your fork or the upstream repository, then install dependencies:
 
 ```bash
-git clone https://github.com/Somtiee/swaparc.git
-cd swaparc
+git clone https://github.com/Somtiee/quad.git
+cd quad
 npm install
 ```
 
@@ -34,7 +34,7 @@ Copy **`.env.example`** to **`.env`** and set values required for your use case.
 
 ### Privacy pool settings
 
-PrivPay’s privacy pool and client proving pipeline read several **`VITE_`-prefixed** addresses and artifact locations so the browser can resolve the right contracts and Groth16 assets. Set **`VITE_PRIVACY_POOL_ADDRESS_USDC`**, **`VITE_PRIVACY_POOL_ADDRESS_EURC`** and **`VITE_PRIVACY_POOL_ADDRESS_SWPRC`** to the on-chain pool deployment for each supported token, matching whatever you deployed or were given for your environment. **`VITE_PRIVACY_POOL_FROM_BLOCK`** should be the first block where the pool contract exists so indexers and log scans stay efficient on Arc (narrow ranges matter where **getLogs** windows are capped). **`VITE_PRIVPAY_WASM_URL`** and **`VITE_PRIVPAY_ZKEY_URL`** point at the **WASM** and **final zkey** the browser loads for Groth16 proving in the claim flow; typically under `public/` or a CDN URL you control. Until these are coherent with your deployment, claim and pool UIs will misbehave in ways that look like “loading forever” or proof errors rather than ordinary swap failures.
+PrivPay’s privacy pool and client proving pipeline read several **`VITE_`-prefixed** addresses and artifact locations so the browser can resolve the right contracts and Groth16 assets. Set **`VITE_PRIVACY_POOL_ADDRESS_USDC`**, **`VITE_PRIVACY_POOL_ADDRESS_EURC`** and **`VITE_PRIVACY_POOL_ADDRESS_QDRC`** to the on-chain pool deployment for each supported token, matching whatever you deployed or were given for your environment. **`VITE_PRIVACY_POOL_FROM_BLOCK`** should be the first block where the pool contract exists so indexers and log scans stay efficient on Arc (narrow ranges matter where **getLogs** windows are capped). **`VITE_PRIVPAY_WASM_URL`** and **`VITE_PRIVPAY_ZKEY_URL`** point at the **WASM** and **final zkey** the browser loads for Groth16 proving in the claim flow; typically under `public/` or a CDN URL you control. Until these are coherent with your deployment, claim and pool UIs will misbehave in ways that look like “loading forever” or proof errors rather than ordinary swap failures.
 
 ### Relayer settings (if using relay)
 

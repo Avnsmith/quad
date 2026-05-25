@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import logo from "../assets/swaparc-logo.png";
+import logo from "../assets/quad-logo.svg";
 import { DOCS_FLAT_PAGES, DOCS_PREVIEW_SECTIONS } from "../docsPreviewCatalog";
 
-const GITHUB_HREF = "https://github.com/Somtiee/swaparc";
-const X_HREF = "https://x.com/swaparc_app";
+const GITHUB_HREF = "https://github.com/Somtiee/quad";
+const X_HREF = "https://x.com/quad_app";
 
 const AUDIENCE_SIDEBAR_TITLE = {
   user: "User guide",

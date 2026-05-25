@@ -11,11 +11,7 @@
   ],
   "crons": [
     {
-      "path": "/api/payments/recurring/run",
-      "schedule": "*/5 * * * *"
-    },
-    {
-      "path": "/api/payments/payroll/run",
+      "path": "/api/payments/recurring-engine",
       "schedule": "*/5 * * * *"
     },
     {

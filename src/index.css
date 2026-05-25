@@ -1,3 +1,29 @@
+:root {
+  /* --- Quad Light Blue Theme --- */
+  --color-primary:        #3b82f6;   /* blue-500 */
+  --color-primary-light:  #93c5fd;   /* blue-300 */
+  --color-primary-dark:   #1d4ed8;   /* blue-700 */
+  --color-accent:         #60a5fa;   /* blue-400 */
+  --color-accent-glow:    rgba(96, 165, 250, 0.35);
+
+  --color-bg:             #0a1628;   /* very dark blue-navy */
+  --color-bg-card:        #0f2040;
+  --color-bg-card-hover:  #132850;
+  --color-border:         rgba(96, 165, 250, 0.25);
+  --color-border-active:  rgba(96, 165, 250, 0.6);
+
+  --color-text:           #e2eeff;
+  --color-muted:          #7da3cc;
+  --color-heading:        #bfdbfe;   /* blue-200 */
+
+  --color-success:        #34d399;
+  --color-error:          #f87171;
+  --color-warning:        #fbbf24;
+
+  /* Glow effects — replace #60a5fa glow with blue glow */
+  --glow-primary: 0 0 18px rgba(96, 165, 250, 0.55), 0 0 40px rgba(59, 130, 246, 0.3);
+  --glow-card:    0 10px 30px rgba(59, 130, 246, 0.15);
+}
 /* REMOVE the Vite template layout restrictions */
 :root, html, body, #root {
   margin: 0;

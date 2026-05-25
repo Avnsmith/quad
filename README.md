@@ -1,4 +1,4 @@
-# SwapARC
+# Quad
 
 ## Node version
 

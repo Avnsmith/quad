@@ -15,7 +15,7 @@ const SYMBOL_TO_COINGECKO_ID = {
 const CACHE_TTL_MS = 60_000; // 60s
 // Keep a small in-memory cache per serverless instance
 // shape: { [cacheKey]: { ts: number, data: object } }
-const PRICE_CACHE = globalThis.__swaparcPriceCache || (globalThis.__swaparcPriceCache = {});
+const PRICE_CACHE = globalThis.__quadPriceCache || (globalThis.__quadPriceCache = {});
 
 export default async function handler(req, res) {
   // Simple GET request
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
         method: "GET",
         headers: {
             "Accept": "application/json",
-            "User-Agent": "Swaparc-Backend/1.0"
+            "User-Agent": "Quad-Backend/1.0"
         }
     });
 

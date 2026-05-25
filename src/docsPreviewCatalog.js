@@ -1,27 +1,27 @@
-import readme from "../docs/swaparc/README.md?raw";
-import introHow from "../docs/swaparc/introduction/how-swaparc-works.md?raw";
-import introWhat from "../docs/swaparc/introduction/what-is-swaparc.md?raw";
-import introGlossary from "../docs/swaparc/introduction/networks-and-glossary.md?raw";
-import gettingStartedGuide from "../docs/swaparc/getting-started/getting-started.md?raw";
-import gettingStartedPrereq from "../docs/swaparc/getting-started/prerequisites-and-environment.md?raw";
-import gettingStartedWallet from "../docs/swaparc/getting-started/connect-a-wallet.md?raw";
-import gettingStartedWalletVsEmail from "../docs/swaparc/getting-started/wallet-vs-email-connect.md?raw";
-import gettingStartedFirstRun from "../docs/swaparc/getting-started/first-swap-and-liquidity.md?raw";
-import featureSwap from "../docs/swaparc/core-features/swap.md?raw";
-import featurePools from "../docs/swaparc/core-features/pools-and-liquidity.md?raw";
-import featurePrivpay from "../docs/swaparc/core-features/privpay.md?raw";
-import buildLocal from "../docs/swaparc/build/local-development.md?raw";
-import buildContracts from "../docs/swaparc/build/contracts-and-architecture.md?raw";
-import buildPrivpayApi from "../docs/swaparc/build/api-reference-privpay.md?raw";
-import buildSystemApi from "../docs/swaparc/build/api-reference-profile-and-system.md?raw";
-import secOverview from "../docs/swaparc/security-and-privacy/security.md?raw";
-import secThreat from "../docs/swaparc/security-and-privacy/threat-model.md?raw";
-import secZk from "../docs/swaparc/security-and-privacy/zk-claim-security.md?raw";
-import secKeys from "../docs/swaparc/security-and-privacy/key-management-and-backups.md?raw";
-import opsRelayer from "../docs/swaparc/operate/relayer-operations.md?raw";
-import opsJobs from "../docs/swaparc/operate/jobs-and-healthchecks.md?raw";
-import supportFaq from "../docs/swaparc/support/faq.md?raw";
-import supportTroubleshooting from "../docs/swaparc/support/troubleshooting.md?raw";
+import readme from "../docs/quad/README.md?raw";
+import introHow from "../docs/quad/introduction/how-quad-works.md?raw";
+import introWhat from "../docs/quad/introduction/what-is-quad.md?raw";
+import introGlossary from "../docs/quad/introduction/networks-and-glossary.md?raw";
+import gettingStartedGuide from "../docs/quad/getting-started/getting-started.md?raw";
+import gettingStartedPrereq from "../docs/quad/getting-started/prerequisites-and-environment.md?raw";
+import gettingStartedWallet from "../docs/quad/getting-started/connect-a-wallet.md?raw";
+import gettingStartedWalletVsEmail from "../docs/quad/getting-started/wallet-vs-email-connect.md?raw";
+import gettingStartedFirstRun from "../docs/quad/getting-started/first-swap-and-liquidity.md?raw";
+import featureSwap from "../docs/quad/core-features/swap.md?raw";
+import featurePools from "../docs/quad/core-features/pools-and-liquidity.md?raw";
+import featurePrivpay from "../docs/quad/core-features/privpay.md?raw";
+import buildLocal from "../docs/quad/build/local-development.md?raw";
+import buildContracts from "../docs/quad/build/contracts-and-architecture.md?raw";
+import buildPrivpayApi from "../docs/quad/build/api-reference-privpay.md?raw";
+import buildSystemApi from "../docs/quad/build/api-reference-profile-and-system.md?raw";
+import secOverview from "../docs/quad/security-and-privacy/security.md?raw";
+import secThreat from "../docs/quad/security-and-privacy/threat-model.md?raw";
+import secZk from "../docs/quad/security-and-privacy/zk-claim-security.md?raw";
+import secKeys from "../docs/quad/security-and-privacy/key-management-and-backups.md?raw";
+import opsRelayer from "../docs/quad/operate/relayer-operations.md?raw";
+import opsJobs from "../docs/quad/operate/jobs-and-healthchecks.md?raw";
+import supportFaq from "../docs/quad/support/faq.md?raw";
+import supportTroubleshooting from "../docs/quad/support/troubleshooting.md?raw";
 
 /** @typedef {'user' | 'developer'} DocsAudience */
 
@@ -35,8 +35,8 @@ export const DOCS_PREVIEW_SECTIONS = [
     label: "Introduction",
     pages: [
       { id: "readme", title: "Overview", markdown: readme },
-      { id: "how-swaparc-works", title: "How SwapArc works", markdown: introHow },
-      { id: "what-is-swaparc", title: "What is SwapArc", markdown: introWhat },
+      { id: "how-quad-works", title: "How SwapArc works", markdown: introHow },
+      { id: "what-is-quad", title: "What is SwapArc", markdown: introWhat },
       { id: "networks-and-glossary", title: "Networks & glossary", markdown: introGlossary },
     ],
   },

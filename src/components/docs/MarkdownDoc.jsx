@@ -106,7 +106,7 @@ function stripBackticks(str) {
 }
 
 /**
- * Lightweight markdown renderer used by the in-app docs (source: docs/swaparc/*.md).
+ * Lightweight markdown renderer used by the in-app docs (source: docs/quad/*.md).
  * @param {{ markdown?: string, suppressFirstH1?: boolean }} props — when suppressFirstH1, skips the first `# …` line (avoids duplicating the layout title).
  */
 export default function MarkdownDoc({ markdown, suppressFirstH1 = false }) {

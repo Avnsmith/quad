@@ -46,3 +46,6 @@ build/privpay/pot*_*.ptau
 build/privpay/**/*_final.ptau
 *.ptau
 tools/circom.exe
+.env
+node_modules/
+dist/

@@ -24,7 +24,7 @@ If you are not shipping software or running infrastructure, follow the **User gu
 ### User guide
 
 - **New to SwapArc**
-  - [How SwapArc works](introduction/how-swaparc-works.md) → [What is SwapArc?](introduction/what-is-swaparc.md) → [Networks & glossary](introduction/networks-and-glossary.md)
+  - [How SwapArc works](introduction/how-quad-works.md) → [What is SwapArc?](introduction/what-is-quad.md) → [Networks & glossary](introduction/networks-and-glossary.md)
 - **First actions**
   - [Getting started](getting-started/getting-started.md) → [Connect a wallet](getting-started/connect-a-wallet.md) → [Wallet vs email connect](getting-started/wallet-vs-email-connect.md) → [First swap & liquidity](getting-started/first-swap-and-liquidity.md)
 - **Features**
@@ -45,11 +45,11 @@ If you are not shipping software or running infrastructure, follow the **User gu
 
 ## Documentation map
 
-Source files under `docs/swaparc/`:
+Source files under `docs/quad/`:
 
 - **Introduction**
-  - [How SwapArc works](introduction/how-swaparc-works.md) — `introduction/how-swaparc-works.md`
-  - [What is SwapArc](introduction/what-is-swaparc.md) — `introduction/what-is-swaparc.md`
+  - [How SwapArc works](introduction/how-quad-works.md) — `introduction/how-quad-works.md`
+  - [What is SwapArc](introduction/what-is-quad.md) — `introduction/what-is-quad.md`
   - [Networks & glossary](introduction/networks-and-glossary.md) — `introduction/networks-and-glossary.md`
 - **Getting started**
   - [Getting started](getting-started/getting-started.md) — `getting-started/getting-started.md`

@@ -50,6 +50,6 @@ Short tour of the product. For **swap pool** vs **LP pool** and other terms; see
 
 ## Where to go next
 
-- [What is SwapArc?](what-is-swaparc.md)
+- [What is SwapArc?](what-is-quad.md)
 - [PrivPay (feature)](../core-features/privpay.md)
 - [PrivPay private receive (concepts)](../concepts/privpay-private-receive-zk.md)

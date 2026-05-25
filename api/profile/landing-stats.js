@@ -22,7 +22,7 @@ const TOTAL_SWAP_VOLUME_FILE_URL = new URL(
   "../../data/stats/totalSwapVolume.latest.json",
   import.meta.url
 );
-const ARCLENZ_SWAPARC_API = "https://arclenz.xyz/api/ecosystem/swaparc";
+const ARCLENZ_QUAD_API = "https://arclenz.xyz/api/ecosystem/quad";
 const KV_TIMEOUT_MS = 1500;
 const ARCLENZ_TIMEOUT_MS = 4000;
 
@@ -119,7 +119,7 @@ async function fetchArcLensTxCount() {
   const ac = new AbortController();
   const timer = setTimeout(() => ac.abort(), ARCLENZ_TIMEOUT_MS);
   try {
-    const resp = await fetch(ARCLENZ_SWAPARC_API, {
+    const resp = await fetch(ARCLENZ_QUAD_API, {
       method: "GET",
       signal: ac.signal,
     });

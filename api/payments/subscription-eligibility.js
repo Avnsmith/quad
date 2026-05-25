@@ -1,5 +1,5 @@
 import { kv } from "../../lib/server/kv.js";
-import { isFrozenEarlySwaparcer } from "../../lib/server/earlySwaparcerFrozen.js";
+import { isFrozenEarlyQuader } from "../../lib/server/earlyQuadrantFrozen.js";
 
 async function safeKvCall(fn, fallback = null) {
   try {
@@ -10,14 +10,14 @@ async function safeKvCall(fn, fallback = null) {
 }
 
 /**
- * Early Swaparcer claiming is FROZEN. We no longer compute eligibility from
- * live stats. A wallet is treated as an Early Swaparcer if and only if:
+ * Early Quadrant claiming is FROZEN. We no longer compute eligibility from
+ * live stats. A wallet is treated as an Early Quadrant if and only if:
  *  - their address is in the pre-freeze snapshot
- *    (badges:earlySwaparcer:frozen / data/badges/earlySwaparcer.frozen.json).
+ *    (badges:earlyQuadrant:frozen / data/badges/earlyQuadrant.frozen.json).
  */
-async function resolveEarlySwaparcer(normalizedOwner) {
+async function resolveEarlyQuader(normalizedOwner) {
   if (!normalizedOwner) return false;
-  return isFrozenEarlySwaparcer(normalizedOwner);
+  return isFrozenEarlyQuader(normalizedOwner);
 }
 
 async function getProfileByOwner(owner) {
@@ -48,13 +48,13 @@ export async function getArcpayAccessByAddress(owner) {
       recurringPayments: false,
       payrollAutomation: false,
       advancedPrivacy: false,
-      isEarlySwaparcer: false,
+      isEarlyQuadrant: false,
       subscriptionActive: false,
       expiresAt: null,
     };
   }
 
-  const isEarlySwaparcer = await resolveEarlySwaparcer(normalizedOwner);
+  const isEarlyQuadrant = await resolveEarlyQuader(normalizedOwner);
 
   const subKey = `privpay:subscription:${normalizedOwner}`;
   const sub = (await safeKvCall(() => kv.get(subKey), null)) || null;
@@ -64,15 +64,15 @@ export async function getArcpayAccessByAddress(owner) {
       ? new Date(expiresAt).getTime() > Date.now()
       : false;
 
-  const unlocked = isEarlySwaparcer || subscriptionActive;
+  const unlocked = isEarlyQuadrant || subscriptionActive;
   return {
     ok: true,
     owner: normalizedOwner,
-    plan: isEarlySwaparcer ? "early-swaparcer-free" : subscriptionActive ? "monthly" : "usage-fee",
+    plan: isEarlyQuadrant ? "early-quader-free" : subscriptionActive ? "monthly" : "usage-fee",
     recurringPayments: true,
     payrollAutomation: true,
     advancedPrivacy: unlocked,
-    isEarlySwaparcer,
+    isEarlyQuadrant,
     subscriptionActive,
     expiresAt: subscriptionActive ? expiresAt : null,
   };
